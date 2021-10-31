@@ -1,16 +1,17 @@
+import Heart from '../../assets/heart.png';
 export default function PlayerStats(ctx, player, canvas) {
     //name
     ctx.font = "20px Arial";
     ctx.fillStyle = "white";
-    ctx.fillText(`Name: ${player.name}`, 20, 30);
+    ctx.fillText(`Brick Breaker`, 20, 30);
 
     //lives
-    ctx.font = "20px Arial";
-    ctx.fillStyle = "red";
+    const heart = new Image();
+    heart.src = Heart;
     let gap = 0;
     for (let i = 0; i < player.lives; i++) {
-        ctx.fillText("❤", canvas.width / 2 + gap, 30);
-        gap += 30;
+        ctx.drawImage(heart, canvas.width / 2 + gap, 10);
+        gap += 40;
     }
 
     //scores

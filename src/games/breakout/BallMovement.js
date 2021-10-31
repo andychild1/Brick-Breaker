@@ -13,10 +13,10 @@ class Ball {
     }
     draw(ctx) {
         ctx.beginPath();
-        ctx.fillStyle = "red";
+        ctx.fillStyle = "darkgrey";
         ctx.arc(this.x, this.y, this.rad, 0, 2 * Math.PI);
         ctx.strokeStyle = "black";
-        ctx.strokeWidth = 4;
+        ctx.strokeWidth = 2;
         ctx.fill();
         ctx.stroke();
     }

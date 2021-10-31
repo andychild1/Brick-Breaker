@@ -5,18 +5,18 @@ export default {
         dx: 5,
         dy: 5,
         rad: 10,
-        speed: 10
+        speed: 9
     },
     brickObj: {
         x: 0.5,
         y: 50,
         height: 20,
         density: 2,
-        colors: ["blue", "lightblue"]
+        colors: ["green", "olive"]
     },
     player: {
         name: "Andy",
-        lives: 2,
+        lives: 4,
         score: 0,
         level: 1
     },
@@ -24,6 +24,6 @@ export default {
         height: 20,
         width: 100,
         x: 100,
-        color: 'orange'
+        color: 'grey'
     }
 };

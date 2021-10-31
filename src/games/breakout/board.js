@@ -9,7 +9,7 @@ import PaddleHit from './utils/PaddleHit';
 import PlayerStats from './PlayerStats';
 import AllBroken from './utils/AllBroke';
 import ResetBall from './utils/ResetBall';
-import { GameManager } from './GameManager';
+import { GameOver, TryAgain } from './GameOver';
 
 let bricks = [];
 
@@ -17,6 +17,7 @@ let { ballObj, paddleProps, brickObj, player } = data;
 
 export default function Board() {
     const canvasRef = useRef(null);
+    let gamePaused = false;
 
     useEffect(() => {
         const render = () => {
@@ -43,16 +44,19 @@ export default function Board() {
                 ResetBall(ballObj, canvas, paddleProps);
                 player.level = 1;
                 brickObj.y = 50;
-                GameManager(ctx, canvas);
-                alert("Game over");
+                GameOver(ctx, canvas);
+                TryAgain(ctx, canvas);
+                ballObj.x = canvas.width / 2;
+                paddleProps.x = canvas.width / 2 - paddleProps.width / 2;
             }
 
-            //display bricks
             bricks.map((brick) => {
                 return brick.draw(ctx);
             });
+            
            //handle ball movement
             BallMovement(ctx, ballObj);
+
 
             //check all broken
             AllBroken(bricks, player, canvas, ballObj);
@@ -84,17 +88,31 @@ export default function Board() {
             PaddleHit(ballObj, paddleProps);
 
             requestAnimationFrame(render)
+    }
+    render();
+
+}, []);
+
+    const handleKeyDown = (e) => {
+       
+        if (e.code === "Enter") {
+            window.location.reload(true); 
+        } else if (e.code === "KeyQ") {
+            console.log("quit");
         }
-        render();
-    }, []);
+    }
+
+
+    document.addEventListener("keypress", handleKeyDown);
 
     return (
          <canvas 
          id="canvas" 
          ref={canvasRef} 
-         height="600px" 
-         width={window.innerWidth -20}
+         height="650px" 
+         width={window.innerWidth -30}
          onMouseMove={(e) => (paddleProps.x = e.clientX - paddleProps.width / 2 -10)}
          ></canvas>
+
     )
 }
